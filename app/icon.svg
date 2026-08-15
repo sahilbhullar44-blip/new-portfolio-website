@@ -1,17 +1,14 @@
-<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0a0a0a"/>
-      <stop offset="100%" stop-color="#1a1a1a"/>
-    </linearGradient>
-    <linearGradient id="text" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#22d3ee"/>
-      <stop offset="100%" stop-color="#a855f7"/>
-    </linearGradient>
-  </defs>
-  <rect width="32" height="32" fill="url(#bg)" rx="6"/>
-  <rect x="1" y="1" width="30" height="30" fill="none" stroke="#22d3ee" stroke-width="0.5" rx="5" opacity="0.3"/>
-  <text x="8" y="20" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="url(#text)">S</text>
-  <text x="18" y="20" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="url(#text)">S</text>
-  <circle cx="16" cy="10" r="1" fill="#22d3ee" opacity="0.6"/>
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dark Newsprint Background -->
+  <rect width="32" height="32" rx="6" fill="#111111"/>
+  <!-- Double Broadsheet Border -->
+  <rect x="2" y="2" width="28" height="28" rx="4" fill="none" stroke="#E63946" stroke-width="1.5"/>
+  <rect x="4" y="4" width="24" height="24" rx="2" fill="none" stroke="#F7F5F0" stroke-width="0.75" stroke-dasharray="2 1"/>
+  
+  <!-- Editorial "S" Crest -->
+  <text x="16" y="22" font-family="Georgia, 'Playfair Display', serif" font-size="18" font-weight="900" text-anchor="middle" fill="#F7F5F0">S</text>
+  
+  <!-- Crimson Newsroom Pulse Accent -->
+  <circle cx="23" cy="9" r="2.5" fill="#E63946"/>
+  <circle cx="23" cy="9" r="1" fill="#FFFFFF"/>
 </svg>

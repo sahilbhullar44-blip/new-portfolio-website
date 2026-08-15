@@ -1,67 +1,253 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #F7F5F0;
+    --foreground: #111111;
+    --editorial-red: #E63946;
+    --paper-white: #FFFFFF;
+    --ink-black: #111111;
+    --font-sans: var(--font-geist-sans), Inter, system-ui, sans-serif;
+    --font-mono: var(--font-geist-mono), monospace;
+    --font-serif: var(--font-playfair), Georgia, serif;
+  }
+
+  body {
+    background-color: #F7F5F0;
+    color: #111111;
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+
+/* Readership Ink Themes - High Contrast Override System */
+[data-theme="midnight"] body,
+[data-theme="midnight"] main,
+[data-theme="midnight"] header,
+[data-theme="midnight"] footer,
+[data-theme="midnight"] section {
+  background-color: #0F0F10 !important;
+  color: #F4F1EA !important;
 }
 
-/* Global Scrollbar */
+[data-theme="midnight"] .bg-\[\#F7F5F0\],
+[data-theme="midnight"] .bg-\[\#FFFFFF\] {
+  background-color: #18181A !important;
+  color: #F4F1EA !important;
+}
+
+[data-theme="midnight"] .text-\[\#111111\],
+[data-theme="midnight"] .text-\[\#333333\],
+[data-theme="midnight"] .text-\[\#222222\] {
+  color: #F4F1EA !important;
+}
+
+[data-theme="midnight"] .text-\[\#444444\],
+[data-theme="midnight"] .text-\[\#555555\],
+[data-theme="midnight"] .text-slate-400 {
+  color: #B5B2A8 !important;
+}
+
+[data-theme="midnight"] .border-\[\#111111\] {
+  border-color: #38383C !important;
+}
+
+[data-theme="midnight"] .newspaper-double-border {
+  border-top: 3px double #45454A !important;
+  border-bottom: 3px double #45454A !important;
+}
+
+[data-theme="midnight"] .newspaper-card {
+  background-color: #1F1F22 !important;
+  border-color: #38383C !important;
+  color: #F4F1EA !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+}
+
+[data-theme="midnight"] .newspaper-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 6px 6px 0px #E63946 !important;
+}
+
+[data-theme="midnight"] input,
+[data-theme="midnight"] textarea {
+  background-color: #262626 !important;
+  color: #FFFFFF !important;
+  border-color: #444444 !important;
+}
+
+[data-theme="midnight"] .drop-cap::first-letter {
+  color: #F0EFEA !important;
+}
+
+/* Explicit Title & Link Hover Rule Overrides for Midnight Dark & Sepia Themes */
+[data-theme="midnight"] .group:hover .group-hover\:text-\[\#E63946\],
+[data-theme="midnight"] a.group:hover h1,
+[data-theme="midnight"] a.group:hover *,
+[data-theme="midnight"] a:hover h1 {
+  color: #E63946 !important;
+  text-shadow: none !important;
+}
+
+/* Sepia Aged Newsprint High Contrast & Harmonized Color System */
+[data-theme="sepia"] body,
+[data-theme="sepia"] main,
+[data-theme="sepia"] header,
+[data-theme="sepia"] footer,
+[data-theme="sepia"] section,
+[data-theme="sepia"] nav {
+  background-color: #EBE3D5 !important;
+  color: #2B251F !important;
+}
+
+[data-theme="sepia"] .bg-\[\#F7F5F0\] {
+  background-color: #EBE3D5 !important;
+}
+
+[data-theme="sepia"] .bg-\[\#FFFFFF\],
+[data-theme="sepia"] .bg-white {
+  background-color: #F5EFEB !important;
+}
+
+[data-theme="sepia"] .text-\[\#111111\],
+[data-theme="sepia"] .text-\[\#333333\],
+[data-theme="sepia"] .text-\[\#222222\] {
+  color: #2B251F !important;
+}
+
+[data-theme="sepia"] .text-\[\#444444\],
+[data-theme="sepia"] .text-\[\#555555\],
+[data-theme="sepia"] .text-slate-400 {
+  color: #5C5248 !important;
+}
+
+[data-theme="sepia"] .border-\[\#111111\] {
+  border-color: #2B251F !important;
+}
+
+[data-theme="sepia"] .newspaper-double-border {
+  background-color: #EBE3D5 !important;
+  border-top: 3px double #2B251F !important;
+  border-bottom: 3px double #2B251F !important;
+}
+
+[data-theme="sepia"] .newspaper-card {
+  background-color: #F5EFEB !important;
+  border-color: #2B251F !important;
+  color: #2B251F !important;
+  box-shadow: 4px 4px 0px #2B251F !important;
+}
+
+[data-theme="sepia"] .newspaper-card:hover {
+  box-shadow: 6px 6px 0px #C85A32 !important;
+}
+
+/* Red Button & Accent Harmonization in Sepia */
+[data-theme="sepia"] .bg-\[\#E63946\] {
+  background-color: #C85A32 !important;
+  color: #F5EFEB !important;
+}
+
+[data-theme="sepia"] .text-\[\#E63946\],
+[data-theme="sepia"] .decoration-\[\#E63946\] {
+  color: #C85A32 !important;
+  text-decoration-color: #C85A32 !important;
+}
+
+[data-theme="sepia"] .bg-\[\#111111\] {
+  background-color: #2B251F !important;
+  color: #F5EFEB !important;
+}
+
+[data-theme="sepia"] .hover\:bg-\[\#E63946\]:hover,
+[data-theme="sepia"] .hover\:bg-\[\#111111\]:hover {
+  background-color: #C85A32 !important;
+  color: #F5EFEB !important;
+}
+
+[data-theme="sepia"] .hover\:text-\[\#E63946\]:hover,
+[data-theme="sepia"] .group:hover .group-hover\:text-\[\#E63946\],
+[data-theme="sepia"] a.group:hover h1,
+[data-theme="sepia"] a:hover h1 {
+  color: #C85A32 !important;
+  text-shadow: none !important;
+}
+
+[data-theme="sepia"] input,
+[data-theme="sepia"] textarea {
+  background-color: #F5EFEB !important;
+  color: #2B251F !important;
+  border-color: #2B251F !important;
+}
+
+[data-theme="sepia"] .drop-cap::first-letter {
+  color: #2B251F !important;
+}
+
+/* Serif Editorial Typography */
+.font-serif-editorial {
+  font-family: var(--font-playfair), Georgia, serif;
+}
+
+/* Newspaper Dropped Initial Cap */
+.drop-cap::first-letter {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 3.5rem;
+  line-height: 0.85;
+  float: left;
+  margin-right: 0.5rem;
+  margin-top: 0.15rem;
+  font-weight: 900;
+  color: #111111;
+}
+
+/* Newspaper Double Border Rule */
+.newspaper-double-border {
+  border-top: 3px double #111111;
+  border-bottom: 3px double #111111;
+}
+
+/* Broadsheet Editorial Card Styling */
+.newspaper-card {
+  background: #FFFFFF;
+  border: 1px solid #111111;
+  box-shadow: 4px 4px 0px #111111;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.newspaper-card:hover {
+  transform: translateY(-4px) scale(1.008);
+  box-shadow: 6px 6px 0px #E63946;
+  border-color: #111111;
+}
+
+/* Hardware Acceleration */
+.gpu {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Custom Broadsheet Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px; /* Slightly wider for better usability vs aesthetic balance */
+  width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #050505; /* Very dark background to blend in */
+  background: #F7F5F0;
+  border-left: 1px solid #111111;
 }
 
-
 ::-webkit-scrollbar-thumb {
-  background: rgba(34, 211, 238, 0.4); /* Cyan-400 with opacity */
-  border-radius: 4px;
+  background: #111111;
+  border-radius: 0px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(34, 211, 238, 0.6); /* Cyan-400 with higher opacity on hover */
-}
-
-
-/* Custom Scrollbar Styles (Utility) */
-.custom-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(34, 211, 238, 0.3) transparent;
-}
-
-.custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(34, 211, 238, 0.3);
-  border-radius: 3px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(34, 211, 238, 0.5);
+  background: #E63946;
 }
 
 .hide-scrollbar {
@@ -73,14 +259,98 @@ body {
   display: none;
 }
 
-/* Aggressive Autofill Fix */
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active {
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: #4ade80 !important;
-    -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
-    box-shadow: 0 0 0px 1000px transparent inset !important;
-    transition: background-color 5000s ease-in-out 0s;
+/* Print Broadsheet PDF Styles */
+@media print {
+  html, body, main, section, div, article, header, footer {
+    min-height: 0 !important;
+    max-height: none !important;
+    height: auto !important;
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    font-size: 10pt !important;
+    line-height: 1.35 !important;
+    box-shadow: none !important;
+    break-before: auto !important;
+    page-break-before: auto !important;
+    break-after: auto !important;
+    page-break-after: auto !important;
+  }
+
+  button, nav, .no-print, [role="button"], form, iframe, svg.animate-pulse {
+    display: none !important;
+  }
+
+  /* Prevent Flex Height Stretching & Gaps */
+  .flex-col, .justify-between {
+    justify-content: flex-start !important;
+  }
+
+  /* Balanced Spacing for Sections (Continuous Flow with Comfortable Breathing Space) */
+  section {
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+    margin-bottom: 1rem !important;
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+    break-before: auto !important;
+    page-break-before: auto !important;
+  }
+
+  .space-y-16 > :not([hidden]) ~ :not([hidden]),
+  .space-y-12 > :not([hidden]) ~ :not([hidden]),
+  .space-y-10 > :not([hidden]) ~ :not([hidden]),
+  .space-y-8 > :not([hidden]) ~ :not([hidden]),
+  .space-y-6 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 0.65rem !important;
+  }
+
+  .grid {
+    display: grid !important;
+    gap: 0.75rem !important;
+    margin-bottom: 0.65rem !important;
+  }
+
+  .newspaper-card {
+    box-shadow: none !important;
+    border: 1px solid #000000 !important;
+    padding: 0.75rem !important;
+    break-inside: avoid-page !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* Keep Headings with Following Content */
+  h1, h2, h3, h4 {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  /* Balanced Typography Compression for PDF */
+  h1 { font-size: 1.9rem !important; margin-bottom: 0.4rem !important; line-height: 1.15 !important; }
+  h2 { font-size: 1.4rem !important; margin-bottom: 0.35rem !important; line-height: 1.2 !important; }
+  h3 { font-size: 1.15rem !important; margin-bottom: 0.3rem !important; line-height: 1.2 !important; }
+  p { margin-bottom: 0.4rem !important; }
+
+  a {
+    text-decoration: underline !important;
+    color: #000000 !important;
+  }
+
+  @page {
+    margin: 0.8cm !important;
+    size: A4 portrait;
+  }
 }
+
+/* Compact 1-Page Resume Print Override */
+@media print {
+  body.print-compact-mode section:nth-of-type(n+3),
+  body.print-compact-mode footer,
+  body.print-compact-mode .print-only-full {
+    display: none !important;
+  }
+}
+
+
+

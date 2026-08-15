@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import SnowEffect from "@/components/SnowEffect";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,11 +12,19 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
-  title: "Sahilpreet Singh - Full Stack Developer",
+  title: "THE SAHILPREET DISPATCH - VOL. MMXXVI // Avant-Garde Newspaper Portfolio",
   description:
-    "Software Engineer specializing in MERN stack, realtime systems, and multi-tenant architecture. Building scalable applications with React, Node.js, and MongoDB.",
+    "Official Editorial Publication & Portfolio of Sahilpreet Singh. Software Engineer specializing in MERN stack, high-frequency WebSockets, multi-tenant RBAC systems, and AI speech-to-text ETL pipelines.",
 };
+
+import { RadioProvider } from "./context/RadioContext";
+import NewspaperHeader from "@/app/components/NewspaperHeader";
 
 export default function RootLayout({
   children,
@@ -26,14 +32,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning
+        className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased bg-[#F7F5F0] text-[#111111] selection:bg-[#111111] selection:text-[#F7F5F0] min-h-screen flex flex-col justify-between overflow-x-hidden`}
       >
-        <SnowEffect />
-        <Navbar />
-        {children}
+        <RadioProvider>
+          <NewspaperHeader />
+          <div suppressHydrationWarning className="flex-1">{children}</div>
+        </RadioProvider>
       </body>
     </html>
   );
 }
+
+
+
