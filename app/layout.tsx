@@ -25,6 +25,8 @@ export const metadata: Metadata = {
 
 import { RadioProvider } from "./context/RadioContext";
 import NewspaperHeader from "@/app/components/NewspaperHeader";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default function RootLayout({
   children,
@@ -40,6 +42,8 @@ export default function RootLayout({
         <RadioProvider>
           <NewspaperHeader />
           <div suppressHydrationWarning className="flex-1">{children}</div>
+          <Analytics />
+          <SpeedInsights />
         </RadioProvider>
       </body>
     </html>
