@@ -26,6 +26,7 @@ export default function NewspaperHeader() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
   const frameObj = useRef({ frame: 1 });
+  const tweenRef = useRef<gsap.core.Tween | null>(null);
 
   // Preload all 240 transparent PNG frames into memory
   useEffect(() => {
@@ -34,30 +35,37 @@ export default function NewspaperHeader() {
 
     for (let i = 1; i <= totalFrames; i++) {
       const img = new Image();
-      const numStr = String(i).padStart(3, "0");
-      img.src = `/character_frames/frame_${numStr}.png`;
+      const numStr = String(i).padStart(6, "0");
+      img.src = `/frames/frame_${numStr}.png`;
       loadedImages.push(img);
     }
     imagesRef.current = loadedImages;
 
-    // Draw initial frame
-    if (loadedImages[0]) {
-      loadedImages[0].onload = () => {
-        const canvas = canvasRef.current;
-        if (canvas) {
-          const ctx = canvas.getContext("2d");
-          if (ctx) {
-            canvas.width = loadedImages[0].naturalWidth || 848;
-            canvas.height = loadedImages[0].naturalHeight || 478;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(loadedImages[0], 0, 0);
-          }
+    const drawInit = () => {
+      const canvas = canvasRef.current;
+      if (canvas && loadedImages[0]) {
+        const ctx = canvas.getContext("2d");
+        if (ctx) {
+          canvas.width = loadedImages[0].naturalWidth || 848;
+          canvas.height = loadedImages[0].naturalHeight || 478;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(loadedImages[0], 0, 0);
+          console.log("Canvas initial frame drawn. Size:", canvas.width, canvas.height);
         }
-      };
+      }
+    };
+
+    // Draw initial frame safely considering cache
+    if (loadedImages[0]) {
+      if (loadedImages[0].complete) {
+        drawInit();
+      } else {
+        loadedImages[0].onload = drawInit;
+      }
     }
   }, []);
 
-  // GSAP 60 FPS Frame Sequence Timeline
+  // GSAP 60 FPS Frame Sequence Timeline controlled by Hover
   useGSAP(
     () => {
       const canvas = canvasRef.current;
@@ -69,29 +77,25 @@ export default function NewspaperHeader() {
 
       const renderFrame = (idx: number) => {
         const img = imagesRef.current[idx - 1];
-        if (img && img.complete) {
+        if (img) {
           if (canvas.width !== img.naturalWidth || canvas.height !== img.naturalHeight) {
             canvas.width = img.naturalWidth || 848;
             canvas.height = img.naturalHeight || 478;
           }
           ctx.clearRect(0, 0, canvas.width, canvas.height);
           ctx.drawImage(img, 0, 0);
+          console.log("Rendered frame:", idx);
         }
       };
 
-      gsap.to(frameObj.current, {
+      tweenRef.current = gsap.to(frameObj.current, {
         frame: 240,
         snap: "frame",
         ease: "none",
         duration: 10,
-        repeat: -1,
+        paused: true,
         onUpdate: () => {
           renderFrame(Math.round(frameObj.current.frame));
-        },
-        scrollTrigger: {
-          trigger: header,
-          start: "top 95%",
-          toggleActions: "play pause resume pause",
         },
       });
     },
@@ -202,7 +206,7 @@ export default function NewspaperHeader() {
   }, []);
 
   return (
-    <header suppressHydrationWarning className="w-full bg-[#F7F5F0] border-b-2 border-[#111111] font-mono text-xs text-[#111111]">
+    <header ref={headerRef} suppressHydrationWarning className="w-full bg-[#F7F5F0] border-b-2 border-[#111111] font-mono text-xs text-[#111111]">
       {/* Top Printed Metadata & Newsroom Telemetry Bar */}
       <div suppressHydrationWarning className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 border-b border-[#111111]/20 flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-wider text-[#444444]">
         <div suppressHydrationWarning className="flex flex-wrap items-center gap-3">
@@ -246,15 +250,20 @@ export default function NewspaperHeader() {
         </div>
 
         {/* 3D Animated Character resting cleanly on top of the horizontal divider line */}
-        <div className="absolute bottom-0 left-2 sm:left-6 md:left-10 pointer-events-none z-30 transform translate-y-0">
-          <video
-            src="/chroma-keyed-video.webm"
-            autoPlay
-            muted
-            playsInline
-            loop
-            preload="auto"
-            className="h-24 sm:h-28 md:h-32 lg:h-36 w-auto object-contain"
+        <div 
+          className="absolute bottom-0 left-2 sm:left-6 md:left-10 pointer-events-auto cursor-pointer z-30 transform translate-y-0"
+          onMouseEnter={() => {
+            console.log("Hover ENTER. Tween active:", !!tweenRef.current);
+            if (tweenRef.current) tweenRef.current.play();
+          }}
+          onMouseLeave={() => {
+            console.log("Hover LEAVE. Tween active:", !!tweenRef.current);
+            if (tweenRef.current) tweenRef.current.reverse();
+          }}
+        >
+          <canvas
+            ref={canvasRef}
+            className="h-24 sm:h-28 md:h-32 lg:h-36 w-auto object-contain block"
           />
         </div>
       </div>
