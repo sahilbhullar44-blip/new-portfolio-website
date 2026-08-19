@@ -207,6 +207,25 @@ export default function NewspaperHeader() {
 
   return (
     <header ref={headerRef} suppressHydrationWarning className="w-full bg-[#F7F5F0] border-b-2 border-[#111111] font-mono text-xs text-[#111111]">
+      {/* Global Breaking News Marquee Banner */}
+      <div className="w-full bg-[#E63946] text-white py-1.5 px-4 overflow-hidden border-b border-[#111111] no-print">
+        <div className="max-w-7xl mx-auto flex items-center gap-3">
+          <span className="bg-[#111111] text-white px-2 py-0.5 font-bold text-[9px] uppercase tracking-widest shrink-0 animate-pulse">
+            BREAKING NEWS
+          </span>
+          <div className="flex-1 overflow-hidden">
+            <div className="flex items-center gap-8 whitespace-nowrap animate-marquee font-bold text-[11px] uppercase tracking-wider">
+              {Array(4).fill("Developer Sahil continues to work behind the scenes. This portfolio is still under development — more updates coming soon.").map((text, idx) => (
+                <span key={idx} className="flex items-center gap-4">
+                  <span>{text}</span>
+                  <span className="text-[#111111]">•</span>
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Top Printed Metadata & Newsroom Telemetry Bar */}
       <div suppressHydrationWarning className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 border-b border-[#111111]/20 flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-wider text-[#444444]">
         <div suppressHydrationWarning className="flex flex-wrap items-center gap-3">
