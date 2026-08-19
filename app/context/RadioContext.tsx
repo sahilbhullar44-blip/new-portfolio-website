@@ -72,6 +72,24 @@ const VERIFIED_PUNJABI_STATIONS: RadioStation[] = [
   },
   {
     stationuuid: "pb-active-2",
+    name: "Radio City Punjabi (Zeno Hits)",
+    url_resolved: "https://stream.zeno.fm/pa4h8kqd8f0uv",
+    country: "India",
+    countrycode: "IN",
+    tags: "punjabi,pop,hits",
+    votes: 9995,
+  },
+  {
+    stationuuid: "pb-active-3",
+    name: "Old Punjabi Songs Classics (Zeno Retro)",
+    url_resolved: "https://stream.zeno.fm/1hv8up0ww8quv",
+    country: "India",
+    countrycode: "IN",
+    tags: "punjabi,retro,classics",
+    votes: 9990,
+  },
+  {
+    stationuuid: "pb-active-4",
     name: "RED FM Punjabi 93.1 Live Canada",
     url_resolved: "https://ice24.securenetsystems.net/CKYE",
     country: "Canada",
@@ -80,7 +98,7 @@ const VERIFIED_PUNJABI_STATIONS: RadioStation[] = [
     votes: 9980,
   },
   {
-    stationuuid: "pb-active-3",
+    stationuuid: "pb-active-5",
     name: "Sher E Punjab Radio AM 600 Live",
     url_resolved: "https://ais-sa1.streamon.fm/7676_48k.aac",
     country: "Canada",
