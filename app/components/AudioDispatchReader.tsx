@@ -102,77 +102,130 @@ export default function AudioDispatchReader({
   if (!supported) return null;
 
   return (
-    <div
-      className={`no-print p-4 bg-[#FFFFFF] border-2 border-[#111111] font-mono text-xs shadow-[4px_4px_0px_#111111] flex flex-wrap items-center justify-between gap-4 ${className}`}
-    >
-      <div className="flex items-center gap-3">
-        <div
-          className={`p-2 border border-[#111111] ${
-            isPlaying ? "bg-[#E63946] text-white" : "bg-[#F7F5F0] text-[#111111]"
-          }`}
-        >
-          <Radio className={`w-4 h-4 ${isPlaying ? "animate-pulse" : ""}`} />
+    <>
+      {/* Desktop Layout - Shown on sm: and above */}
+      <div
+        className={`hidden sm:flex no-print p-4 bg-[#FFFFFF] border border-[#111111] font-mono shadow-[4px_4px_0px_#111111] items-center justify-between gap-4 text-left ${className}`}
+      >
+        <div className="flex items-center gap-4">
+          <div className="p-2.5 border border-[#111111]/20 text-[#111111]">
+            <Radio className="w-5 h-5" />
+          </div>
+          <div>
+            <div className="text-[10px] text-[#E63946] font-bold uppercase tracking-wider">
+              {title}
+            </div>
+            <div className="font-bold text-[#111111] text-sm leading-tight">
+              {isPlaying ? "TRANSMITTING VOICE DISPATCH..." : isPaused ? "BROADCAST PAUSED" : "LISTEN TO EDITORIAL AUDIO DISPATCH"}
+            </div>
+            {(isPlaying || isPaused) && (
+              <div className="flex items-center gap-3 pt-1">
+                <button
+                  onClick={handleStop}
+                  className="text-[10px] text-[#E63946] hover:text-[#111111] font-bold underline decoration-dotted transition-colors"
+                >
+                  [STOP BROADCAST]
+                </button>
+                {isPlaying && (
+                  <div className="flex items-end gap-0.5 h-3">
+                    <span className="w-0.5 audio-bar animate-[bounce_0.6s_infinite_100ms] h-full"></span>
+                    <span className="w-0.5 bg-[#E63946] animate-[bounce_0.6s_infinite_300ms] h-3/4"></span>
+                    <span className="w-0.5 audio-bar animate-[bounce_0.6s_infinite_200ms] h-full"></span>
+                    <span className="w-0.5 bg-[#E63946] animate-[bounce_0.6s_infinite_400ms] h-1/2"></span>
+                    <span className="w-0.5 audio-bar animate-[bounce_0.6s_infinite_150ms] h-5/6"></span>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
 
-        <div className="space-y-0.5">
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] text-[#E63946] font-bold uppercase tracking-wider">
+        <button
+          onClick={isPlaying ? handlePause : handlePlay}
+          className={`px-4 py-2 font-bold text-xs border border-[#111111] shadow-[2px_2px_0px_#111111] flex items-center gap-2 transition-all shrink-0 ${
+            isPlaying
+              ? "bg-[#E63946] text-white hover:bg-[#111111]"
+              : "bg-[#111111] text-white hover:bg-[#E63946]"
+          }`}
+        >
+          {isPlaying ? (
+            <>
+              <Pause className="w-3 h-3 fill-current" />
+              <span>PAUSE DISPATCH</span>
+            </>
+          ) : (
+            <>
+              <Play className="w-3 h-3 fill-current" />
+              <span>PLAY DISPATCH</span>
+            </>
+          )}
+        </button>
+      </div>
+
+      {/* Mobile Layout - Hidden on sm: and above */}
+      <div
+        className={`sm:hidden no-print p-3.5 bg-[#FFFFFF] border border-[#111111] font-mono shadow-[3px_3px_0px_#111111] flex items-center gap-4 text-left ${className}`}
+      >
+        <button
+          onClick={isPlaying ? handlePause : handlePlay}
+          className={`w-12 h-12 rounded-full border border-[#111111] flex items-center justify-center transition-colors shrink-0 ${
+            isPlaying 
+              ? "bg-[#E63946] text-white hover:bg-[#111111]" 
+              : "bg-[#111111] text-white hover:bg-[#E63946]"
+          }`}
+          title={isPlaying ? "Pause Broadcast" : "Play Broadcast"}
+        >
+          {isPlaying ? (
+            <Pause className="w-5 h-5 fill-current" />
+          ) : (
+            <Play className="w-5 h-5 fill-current ml-0.5" />
+          )}
+        </button>
+
+        <div className="flex-1 min-w-0 space-y-1">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-[9px] text-[#E63946] font-bold uppercase tracking-wider whitespace-nowrap">
               {title}
             </span>
             {isPlaying && (
-              <span className="flex items-center gap-1 font-bold text-[10px] text-emerald-700">
+              <span className="inline-flex items-center gap-1 font-bold text-[9px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 border border-emerald-300">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-ping"></span>
                 ON AIR
               </span>
             )}
+            {isPaused && (
+              <span className="inline-flex items-center gap-1 font-bold text-[9px] text-amber-700 bg-amber-50 px-1.5 py-0.5 border border-amber-300">
+                PAUSED
+              </span>
+            )}
           </div>
-          <div className="font-bold text-[#111111] text-xs">
-            {isPlaying ? "TRANSMITTING VOICE DISPATCH..." : isPaused ? "BROADCAST PAUSED" : "LISTEN TO EDITORIAL AUDIO DISPATCH"}
+
+          <div className="font-bold text-[#111111] text-xs leading-tight truncate">
+            {isPlaying ? "TRANSMITTING VOICE DISPATCH..." : isPaused ? "BROADCAST PAUSED" : "LISTEN TO EDITORIAL READOUT"}
           </div>
+
+          {(isPlaying || isPaused) && (
+            <div className="flex items-center gap-3 pt-0.5">
+              <button
+                onClick={handleStop}
+                className="text-[10px] text-[#E63946] hover:text-[#111111] font-bold underline decoration-dotted transition-colors"
+              >
+                [STOP BROADCAST]
+              </button>
+              
+              {isPlaying && (
+                <div className="flex items-end gap-0.5 h-3">
+                  <span className="w-0.5 audio-bar animate-[bounce_0.6s_infinite_100ms] h-full"></span>
+                  <span className="w-0.5 bg-[#E63946] animate-[bounce_0.6s_infinite_300ms] h-3/4"></span>
+                  <span className="w-0.5 audio-bar animate-[bounce_0.6s_infinite_200ms] h-full"></span>
+                  <span className="w-0.5 bg-[#E63946] animate-[bounce_0.6s_infinite_400ms] h-1/2"></span>
+                  <span className="w-0.5 audio-bar animate-[bounce_0.6s_infinite_150ms] h-5/6"></span>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
-
-      {/* Vintage Radio Sound Bars Animation */}
-      {isPlaying && (
-        <div className="hidden sm:flex items-end gap-1 h-6">
-          <span className="w-1 bg-[#111111] animate-[bounce_0.6s_infinite_100ms] h-full"></span>
-          <span className="w-1 bg-[#E63946] animate-[bounce_0.6s_infinite_300ms] h-3/4"></span>
-          <span className="w-1 bg-[#111111] animate-[bounce_0.6s_infinite_200ms] h-full"></span>
-          <span className="w-1 bg-[#E63946] animate-[bounce_0.6s_infinite_400ms] h-1/2"></span>
-          <span className="w-1 bg-[#111111] animate-[bounce_0.6s_infinite_150ms] h-5/6"></span>
-        </div>
-      )}
-
-      {/* Audio Controls */}
-      <div className="flex items-center gap-2">
-        {!isPlaying ? (
-          <button
-            onClick={handlePlay}
-            className="px-3 py-1.5 bg-[#111111] text-[#F7F5F0] font-bold flex items-center gap-1.5 hover:bg-[#E63946] transition-colors"
-          >
-            <Play className="w-3.5 h-3.5 fill-current" />
-            <span>PLAY DISPATCH</span>
-          </button>
-        ) : (
-          <button
-            onClick={handlePause}
-            className="px-3 py-1.5 bg-[#111111] text-[#F7F5F0] font-bold flex items-center gap-1.5 hover:bg-[#E63946] transition-colors"
-          >
-            <Pause className="w-3.5 h-3.5 fill-current" />
-            <span>PAUSE</span>
-          </button>
-        )}
-
-        {(isPlaying || isPaused) && (
-          <button
-            onClick={handleStop}
-            className="px-3 py-1.5 bg-[#F7F5F0] border border-[#111111] text-[#111111] font-bold flex items-center gap-1.5 hover:bg-[#111111] hover:text-white transition-colors"
-          >
-            <Square className="w-3.5 h-3.5 fill-current" />
-            <span>STOP</span>
-          </button>
-        )}
-      </div>
-    </div>
+    </>
   );
 }

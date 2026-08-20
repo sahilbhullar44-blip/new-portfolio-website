@@ -86,7 +86,7 @@ export default function MagazineAboutStory() {
                       {p.title}
                     </h4>
                   </div>
-                  <p className="text-[#555555] text-xs font-sans leading-relaxed pl-11">{p.desc}</p>
+                  <p className="text-[#555555] text-xs font-sans leading-relaxed pl-0 sm:pl-11">{p.desc}</p>
                 </div>
               );
             })}

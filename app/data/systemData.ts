@@ -59,7 +59,7 @@ export const magazineProjects: ProjectItem[] = [
     color: "text-amber-400",
     accentGradient: "from-amber-500/20 via-amber-500/5 to-transparent",
     metrics: [
-      { label: "Data Pipeline Uptime", value: "99.9%" },
+      { label: "Verified Test Pass Rate", value: "100%" },
       { label: "Task Sync Delay", value: "< 15ms" },
       { label: "RBAC Roles Configured", value: "Dynamic" }
     ],

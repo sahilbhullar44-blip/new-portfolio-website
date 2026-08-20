@@ -52,11 +52,11 @@ export default function NewspaperSkillsIndex() {
                     key={sIdx}
                     className="p-4 bg-[#F7F5F0] border border-[#111111] space-y-2 hover:bg-[#FFFFFF] transition-colors group"
                   >
-                    <div className="flex items-center justify-between font-mono text-sm">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 font-mono text-sm">
                       <span className="font-bold text-[#111111] group-hover:text-[#E63946] transition-colors">
                         {skill.name}
                       </span>
-                      <span className="text-xs px-2 py-0.5 bg-[#111111] text-[#F7F5F0] font-bold">
+                      <span className="text-xs px-2 py-0.5 bg-[#111111] text-[#F7F5F0] font-bold self-start sm:self-auto">
                         {skill.level}
                       </span>
                     </div>

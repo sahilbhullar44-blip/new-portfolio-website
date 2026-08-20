@@ -111,8 +111,8 @@ export default function NewspaperGsapSpread() {
                   <div className="text-[11px] text-[#555555] font-bold">RECORDS/HR AI</div>
                 </div>
                 <div className="p-4 bg-[#FFFFFF] border border-[#111111]">
-                  <div className="text-2xl font-black text-[#C69214]">99.9%</div>
-                  <div className="text-[11px] text-[#555555] font-bold">UPTIME</div>
+                  <div className="text-2xl font-black text-[#C69214]">100%</div>
+                  <div className="text-[11px] text-[#555555] font-bold">TEST PASS</div>
                 </div>
               </div>
             </div>
@@ -166,8 +166,8 @@ export default function NewspaperGsapSpread() {
 
                   <div className="space-y-3 font-mono text-xs">
                     <div className="flex justify-between p-3 bg-[#F7F5F0] border border-[#111111]">
-                      <span className="text-[#555555]">Data Pipeline Uptime</span>
-                      <span className="text-[#111111] font-bold">99.9%</span>
+                      <span className="text-[#555555]">Verified Test Pass Rate</span>
+                      <span className="text-[#111111] font-bold">100%</span>
                     </div>
                     <div className="flex justify-between p-3 bg-[#F7F5F0] border border-[#111111]">
                       <span className="text-[#555555]">Task Sync Delay</span>

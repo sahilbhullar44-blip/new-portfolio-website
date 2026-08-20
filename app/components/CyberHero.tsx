@@ -106,8 +106,8 @@ export default function CyberHero() {
                 <div className="text-[10px] text-slate-400">PROD APPS</div>
               </div>
               <div className="p-3 bg-white/5 border border-white/5 rounded-md">
-                <div className="text-xl font-bold text-[#22C55E]">99.9%</div>
-                <div className="text-[10px] text-slate-400">UPTIME</div>
+                <div className="text-xl font-bold text-[#22C55E]">100%</div>
+                <div className="text-[10px] text-slate-400">TEST PASS</div>
               </div>
               <div className="p-3 bg-white/5 border border-white/5 rounded-md">
                 <div className="text-xl font-bold text-[#A855F7]">100%</div>

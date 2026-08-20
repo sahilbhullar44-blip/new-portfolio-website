@@ -195,13 +195,22 @@
 /* Newspaper Dropped Initial Cap */
 .drop-cap::first-letter {
   font-family: var(--font-playfair), Georgia, serif;
-  font-size: 3.5rem;
-  line-height: 0.85;
+  font-size: 2.5rem;
+  line-height: 0.9;
   float: left;
-  margin-right: 0.5rem;
-  margin-top: 0.15rem;
+  margin-right: 0.35rem;
+  margin-top: 0.1rem;
   font-weight: 900;
   color: #111111;
+}
+
+@media (min-width: 640px) {
+  .drop-cap::first-letter {
+    font-size: 3.5rem;
+    line-height: 0.85;
+    margin-right: 0.5rem;
+    margin-top: 0.15rem;
+  }
 }
 
 /* Newspaper Double Border Rule */
@@ -350,6 +359,131 @@
   body.print-compact-mode .print-only-full {
     display: none !important;
   }
+}
+
+/* Infinite Marquee Animation System */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Active Crossword Clue Box Theme-Aware High Contrast Overrides */
+[data-theme="midnight"] .active-clue-box {
+  background-color: #FFFFFF !important; /* Pure white background */
+  border-color: #FFFFFF !important;     /* Pure white border */
+}
+
+[data-theme="midnight"] .active-clue-box * {
+  color: #000000 !important;            /* Pure black text */
+}
+
+[data-theme="sepia"] .active-clue-box {
+  background-color: #DFD3BE !important;  /* Darker sepia shading */
+  border-color: #C85A32 !important;      /* Sepia accent border */
+}
+
+/* Theme-Aware Headline Badge Colors */
+.headline-badge {
+  background-color: #111111 !important; /* Dark black on morning */
+  color: #F7F5F0 !important;            /* Light text on morning */
+}
+
+[data-theme="midnight"] .headline-badge {
+  background-color: #F4F1EA !important; /* Light white on midnight */
+  color: #0F0F10 !important;            /* Dark text on midnight */
+}
+
+[data-theme="sepia"] .headline-badge {
+  background-color: #2B251F !important; /* Dark charcoal on sepia */
+  color: #F4F1EA !important;            /* Light text on sepia */
+}
+
+/* Theme-Aware Typewriter Card */
+.typewriter-card {
+  background-color: rgba(245, 242, 235, 0.6);
+  border-color: rgba(17, 17, 17, 0.2);
+  color: #222222;
+}
+
+[data-theme="midnight"] .typewriter-card {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(240, 239, 234, 0.2) !important;
+  color: #F0EFEA !important;
+}
+
+[data-theme="sepia"] .typewriter-card {
+  background-color: #EADFC9 !important; /* Soft warm cream on sepia */
+  border-color: rgba(200, 90, 50, 0.3) !important;
+  color: #433422 !important;
+}
+
+/* Theme-Aware Monogram Dropcap */
+.monogram-dropcap {
+  background-color: #111111;
+  color: #F7F5F0;
+}
+
+[data-theme="midnight"] .monogram-dropcap {
+  background-color: #F0EFEA !important;
+  color: #111111 !important;
+}
+
+[data-theme="sepia"] .monogram-dropcap {
+  background-color: #2B251F !important;
+  color: #F4F1EA !important;
+}
+
+/* Theme-Aware Editorial Double Border */
+.editorial-double-border {
+  border-color: rgba(17, 17, 17, 0.2);
+}
+
+[data-theme="midnight"] .editorial-double-border {
+  border-color: rgba(240, 239, 234, 0.2) !important;
+}
+
+[data-theme="sepia"] .editorial-double-border {
+  border-color: rgba(200, 90, 50, 0.2) !important;
+}
+
+/* Theme-Aware Barcode Strip Lines */
+.barcode-strip {
+  background-image: linear-gradient(90deg, #111111 4px, transparent 4px);
+}
+
+[data-theme="midnight"] .barcode-strip {
+  background-image: linear-gradient(90deg, #F0EFEA 4px, transparent 4px) !important;
+}
+
+[data-theme="sepia"] .barcode-strip {
+  background-image: linear-gradient(90deg, #433422 4px, transparent 4px) !important;
+}
+
+/* Theme-Aware Audio Soundwave Anim Bars */
+.audio-bar {
+  background-color: #111111;
+}
+
+[data-theme="midnight"] .audio-bar {
+  background-color: #F0EFEA !important;
+}
+
+[data-theme="sepia"] .audio-bar {
+  background-color: #433422 !important;
 }
 
 

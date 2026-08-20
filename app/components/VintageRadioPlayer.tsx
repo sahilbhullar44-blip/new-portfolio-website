@@ -77,7 +77,7 @@ export default function VintageRadioPlayer() {
                 </span>
               )}
             </div>
-            <div className="font-bold text-[#111111] text-xs flex items-center gap-1.5 truncate max-w-xs sm:max-w-md">
+            <div className="font-bold text-[#111111] text-xs flex items-center gap-1.5 truncate max-w-[180px] xs:max-w-[240px] sm:max-w-md">
               <span className="truncate">{currentStation?.name || "Tuning Live Radio..."}</span>
               <span className="text-[#666666] font-normal text-[10px] shrink-0">
                 ({currentStation?.country || selectedCountry})
@@ -89,89 +89,95 @@ export default function VintageRadioPlayer() {
         {/* Animated Vinyl Equalizer Soundbars */}
         {isPlaying && !offlineError && (
           <div className="hidden xl:flex items-end gap-1 h-5">
-            <span className="w-1 bg-[#111111] animate-[bounce_0.6s_infinite_100ms] h-full"></span>
+            <span className="w-1 audio-bar animate-[bounce_0.6s_infinite_100ms] h-full"></span>
             <span className="w-1 bg-[#E63946] animate-[bounce_0.6s_infinite_300ms] h-3/4"></span>
-            <span className="w-1 bg-[#111111] animate-[bounce_0.6s_infinite_200ms] h-full"></span>
+            <span className="w-1 audio-bar animate-[bounce_0.6s_infinite_200ms] h-full"></span>
             <span className="w-1 bg-[#E63946] animate-[bounce_0.6s_infinite_400ms] h-3/4"></span>
-            <span className="w-1 bg-[#111111] animate-[bounce_0.6s_infinite_150ms] h-5/6"></span>
+            <span className="w-1 audio-bar animate-[bounce_0.6s_infinite_150ms] h-5/6"></span>
           </div>
         )}
 
         {/* Controls & Worldwide Tuner */}
-        <div className="flex items-center gap-2">
-          {/* Country Selector */}
-          <select
-            value={selectedCountry}
-            onChange={(e) => handleCountryChange(e.target.value)}
-            className="h-8 px-2 bg-[#F7F5F0] border border-[#111111] font-bold text-[11px] outline-none cursor-pointer"
-          >
-            {COUNTRIES.map((c) => (
-              <option key={c.code} value={c.code}>
-                {c.name}
-              </option>
-            ))}
-          </select>
+        <div className="flex flex-col sm:flex-row items-center gap-2.5 w-full sm:w-auto">
+          {/* Selectors Group */}
+          <div className="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto">
+            {/* Country Selector */}
+            <select
+              value={selectedCountry}
+              onChange={(e) => handleCountryChange(e.target.value)}
+              className="h-8 px-2 bg-[#F7F5F0] border border-[#111111] font-bold text-[11px] outline-none cursor-pointer w-full sm:w-auto sm:min-w-[90px]"
+            >
+              {COUNTRIES.map((c) => (
+                <option key={c.code} value={c.code}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
 
-          {/* Genre Selector */}
-          <select
-            value={selectedGenre}
-            onChange={(e) => handleGenreChange(e.target.value)}
-            className="h-8 px-2 bg-[#F7F5F0] border border-[#111111] font-bold text-[11px] outline-none cursor-pointer"
-          >
-            {GENRES.map((g) => (
-              <option key={g.tag} value={g.tag}>
-                {g.name}
-              </option>
-            ))}
-          </select>
+            {/* Genre Selector */}
+            <select
+              value={selectedGenre}
+              onChange={(e) => handleGenreChange(e.target.value)}
+              className="h-8 px-2 bg-[#F7F5F0] border border-[#111111] font-bold text-[11px] outline-none cursor-pointer w-full sm:w-auto sm:min-w-[140px]"
+            >
+              {GENRES.map((g) => (
+                <option key={g.tag} value={g.tag}>
+                  {g.name}
+                </option>
+              ))}
+            </select>
+          </div>
 
-          <button
-            onClick={togglePlay}
-            className={`h-8 px-3 font-bold text-xs flex items-center gap-1.5 transition-all shrink-0 ${
-              isPlaying
-                ? "bg-[#111111] text-[#F7F5F0] hover:bg-[#E63946]"
-                : "bg-[#E63946] text-white hover:bg-[#111111] animate-pulse shadow-[2px_2px_0px_#111111]"
-            }`}
-            title={isPlaying ? "Pause Radio" : "Tune in to Live Radio"}
-          >
-            {isPlaying ? (
-              <>
-                <Pause className="w-3.5 h-3.5 fill-current" />
-                <span>PAUSE</span>
-              </>
-            ) : isFetching ? (
-              <>
-                <Radio className="w-3.5 h-3.5 animate-spin" />
-                <span>SEARCHING...</span>
-              </>
-            ) : (
-              <>
-                <Play className="w-3.5 h-3.5 fill-current" />
-                <span>TUNE IN</span>
-              </>
-            )}
-          </button>
+          {/* Action Buttons Row */}
+          <div className="flex items-center gap-2 w-full sm:w-auto">
+            <button
+              onClick={togglePlay}
+              className={`h-8 px-3 font-bold text-xs flex items-center justify-center gap-1.5 transition-all flex-1 sm:flex-initial shrink-0 ${
+                isPlaying
+                  ? "bg-[#111111] text-[#F7F5F0] hover:bg-[#E63946]"
+                  : "bg-[#E63946] text-white hover:bg-[#111111] animate-pulse shadow-[2px_2px_0px_#111111]"
+              }`}
+              title={isPlaying ? "Pause Radio" : "Tune in to Live Radio"}
+            >
+              {isPlaying ? (
+                <>
+                  <Pause className="w-3.5 h-3.5 fill-current" />
+                  <span>PAUSE</span>
+                </>
+              ) : isFetching ? (
+                <>
+                  <Radio className="w-3.5 h-3.5 animate-spin" />
+                  <span>SEARCHING...</span>
+                </>
+              ) : (
+                <>
+                  <Play className="w-3.5 h-3.5 fill-current" />
+                  <span>TUNE IN</span>
+                </>
+              )}
+            </button>
 
-          <button
-            onClick={handleNextStation}
-            className="h-8 p-2 bg-[#F7F5F0] border border-[#111111] text-[#111111] hover:bg-[#111111] hover:text-white transition-colors shrink-0"
-            title="Next Worldwide Station"
-          >
-            <SkipForward className="w-3.5 h-3.5" />
-          </button>
+            <button
+              onClick={handleNextStation}
+              className="h-8 p-2 bg-[#F7F5F0] border border-[#111111] text-[#111111] hover:bg-[#111111] hover:text-white transition-colors shrink-0"
+              title="Next Worldwide Station"
+            >
+              <SkipForward className="w-3.5 h-3.5" />
+            </button>
 
-          <button
-            onClick={toggleVinylCrackle}
-            className={`h-8 px-2 border border-[#111111] font-bold text-[10px] flex items-center gap-1.5 transition-all shrink-0 ${
-              vinylCrackleEnabled
-                ? "bg-[#E63946] text-white shadow-[2px_2px_0px_#111111]"
-                : "bg-[#F7F5F0] text-[#111111] hover:bg-[#111111] hover:text-white"
-            }`}
-            title="Toggle Vintage Analog Vinyl Crackle Sound Effect"
-          >
-            <Disc className={`w-3.5 h-3.5 ${vinylCrackleEnabled ? "animate-spin" : ""}`} />
-            <span>VINYL: {vinylCrackleEnabled ? "ON" : "OFF"}</span>
-          </button>
+            <button
+              onClick={toggleVinylCrackle}
+              className={`h-8 px-2 border border-[#111111] font-bold text-[10px] flex items-center justify-center gap-1.5 transition-all flex-1 sm:flex-initial shrink-0 ${
+                vinylCrackleEnabled
+                  ? "bg-[#E63946] text-white shadow-[2px_2px_0px_#111111]"
+                  : "bg-[#F7F5F0] text-[#111111] hover:bg-[#111111] hover:text-white"
+              }`}
+              title="Toggle Vintage Analog Vinyl Crackle Sound Effect"
+            >
+              <Disc className={`w-3.5 h-3.5 ${vinylCrackleEnabled ? "animate-spin" : ""}`} />
+              <span>VINYL: {vinylCrackleEnabled ? "ON" : "OFF"}</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

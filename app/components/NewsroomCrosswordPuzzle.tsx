@@ -333,15 +333,16 @@ export default function NewsroomCrosswordPuzzle() {
   };
 
   return (
-    <section id="crossword-puzzle" suppressHydrationWarning className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
+    <section id="crossword-puzzle" suppressHydrationWarning className="pt-0 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8 !mt-0 sm:!mt-8">
       {/* Editorial Section Header (Standard Broadsheet Layout) */}
       <div suppressHydrationWarning className="space-y-4 pb-6 border-b-2 border-[#111111] flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 font-mono text-xs font-bold text-[#E63946] tracking-widest uppercase">
-            <span>05 // THE NEWSROOM SUNDAY PUZZLE</span>
+            <span>06 // THE NEWSROOM SUNDAY PUZZLE</span>
           </div>
-          <h2 className="font-serif-editorial font-bold text-4xl sm:text-5xl lg:text-6xl text-[#111111] tracking-tight uppercase">
-            DEV <span className="italic underline decoration-[#E63946]">CROSSWORD</span> & TELEGRAPH
+          <h2 className="font-serif-editorial font-bold text-3xl sm:text-5xl lg:text-6xl text-[#111111] tracking-tight uppercase leading-[1.15] sm:leading-tight">
+            DEV <span className="italic sm:underline decoration-[#E63946] decoration-4 sm:underline-offset-8">CROSSWORD</span> <br className="sm:hidden" />
+            & TELEGRAPH
           </h2>
         </div>
 
@@ -351,15 +352,6 @@ export default function NewsroomCrosswordPuzzle() {
             <Calendar className="w-3.5 h-3.5 text-[#E63946]" />
             <span>{puzzleData.date}</span>
           </span>
-          <button
-            onClick={() => fetchDailyPuzzle(true)}
-            disabled={isGenerating}
-            className="h-9 px-4 bg-[#E63946] text-white font-bold hover:bg-[#111111] transition-colors inline-flex items-center gap-2 border border-[#111111] shadow-[2px_2px_0px_#111111] disabled:opacity-50 shrink-0"
-            title="Generate a fresh new dev crossword edition"
-          >
-            <RefreshCw className={`w-3.5 h-3.5 ${isGenerating ? "animate-spin" : ""}`} />
-            <span>{isGenerating ? "GENERATING..." : "NEW PUZZLE"}</span>
-          </button>
         </div>
       </div>
 
@@ -380,9 +372,9 @@ export default function NewsroomCrosswordPuzzle() {
       </div>
 
       {/* Main Newspaper Crossword Layout (Always Open & Playable) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 bg-[#FFFFFF] border-2 border-[#111111] shadow-[6px_6px_0px_#111111] p-6 sm:p-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 bg-[#FFFFFF] border-2 border-[#111111] shadow-[6px_6px_0px_#111111] p-6 sm:p-8">
         {/* Left Column: 5x5 Crossword Grid */}
-        <div className="lg:col-span-6 flex flex-col items-center justify-center space-y-4">
+        <div className="md:col-span-1 lg:col-span-6 flex flex-col items-center justify-center space-y-4">
           <div className="grid grid-cols-5 gap-1 bg-[#111111] p-1.5 border-4 border-[#111111] max-w-[320px] sm:max-w-[360px] w-full aspect-square">
             {grid.map((rowArr, r) =>
               rowArr.map((cellVal, c) => {
@@ -436,30 +428,33 @@ export default function NewsroomCrosswordPuzzle() {
           <div className="flex flex-wrap items-center justify-center gap-2 pt-2 font-mono text-xs">
             <button
               onClick={handleCheckAnswers}
-              className="px-3 py-1.5 bg-[#111111] text-[#F7F5F0] font-bold border border-[#111111] hover:bg-[#E63946] transition-colors flex items-center gap-1"
+              className="px-3 py-1.5 bg-[#111111] text-[#F7F5F0] font-bold border border-[#111111] hover:bg-[#E63946] transition-colors flex items-center gap-1.5"
+              title="Check Answers"
             >
               <CheckCircle2 className="w-3.5 h-3.5" />
-              <span>CHECK ANSWERS</span>
+              <span className="hidden sm:inline">CHECK ANSWERS</span>
             </button>
             <button
               onClick={handleRevealLetter}
-              className="px-3 py-1.5 bg-[#FFFFFF] text-[#111111] font-bold border border-[#111111] hover:bg-amber-50 transition-colors flex items-center gap-1"
+              className="px-3 py-1.5 bg-[#FFFFFF] text-[#111111] font-bold border border-[#111111] hover:bg-amber-50 transition-colors flex items-center gap-1.5"
+              title="Reveal Letter"
             >
               <HelpCircle className="w-3.5 h-3.5 text-amber-600" />
-              <span>REVEAL LETTER</span>
+              <span className="hidden sm:inline">REVEAL LETTER</span>
             </button>
             <button
               onClick={handleResetPuzzle}
-              className="px-3 py-1.5 bg-[#FFFFFF] text-[#111111] font-bold border border-[#111111] hover:bg-rose-50 transition-colors flex items-center gap-1"
+              className="px-3 py-1.5 bg-[#FFFFFF] text-[#111111] font-bold border border-[#111111] hover:bg-rose-50 transition-colors flex items-center gap-1.5"
+              title="Reset Puzzle"
             >
               <RotateCcw className="w-3.5 h-3.5 text-[#E63946]" />
-              <span>RESET</span>
+              <span className="hidden sm:inline">RESET</span>
             </button>
           </div>
         </div>
 
         {/* Right Column: Across & Down Editorial Clues */}
-        <div className="lg:col-span-6 space-y-6 font-mono text-xs">
+        <div className="md:col-span-1 lg:col-span-6 space-y-6 font-mono text-xs">
           {/* Across Clues */}
           <div className="space-y-2">
             <div className="font-bold text-[#E63946] uppercase tracking-wider border-b border-[#111111] pb-1 flex items-center justify-between">
@@ -473,7 +468,7 @@ export default function NewsroomCrosswordPuzzle() {
                   onClick={() => handleSelectClue(clue)}
                   className={`p-2 border transition-all cursor-pointer ${
                     activeClueId === clue.id
-                      ? "bg-amber-50 border-[#E63946] font-bold"
+                      ? "active-clue-box bg-amber-50 border-[#E63946] font-bold"
                       : "bg-[#F7F5F0] border-[#111111]/20 hover:border-[#111111]"
                   }`}
                 >
@@ -498,7 +493,7 @@ export default function NewsroomCrosswordPuzzle() {
                   onClick={() => handleSelectClue(clue)}
                   className={`p-2 border transition-all cursor-pointer ${
                     activeClueId === clue.id
-                      ? "bg-amber-50 border-[#E63946] font-bold"
+                      ? "active-clue-box bg-amber-50 border-[#E63946] font-bold"
                       : "bg-[#F7F5F0] border-[#111111]/20 hover:border-[#111111]"
                   }`}
                 >

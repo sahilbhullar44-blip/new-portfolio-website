@@ -209,16 +209,17 @@ export default function NewspaperHeader() {
     <header ref={headerRef} suppressHydrationWarning className="w-full bg-[#F7F5F0] border-b-2 border-[#111111] font-mono text-xs text-[#111111]">
       {/* Global Breaking News Marquee Banner */}
       <div className="w-full bg-[#E63946] text-white py-1.5 px-4 overflow-hidden border-b border-[#111111] no-print">
-        <div className="max-w-7xl mx-auto flex items-center gap-3">
-          <span className="bg-[#111111] text-white px-2 py-0.5 font-bold text-[9px] uppercase tracking-widest shrink-0 animate-pulse">
-            BREAKING NEWS
-          </span>
+        <div className="max-w-7xl mx-auto flex items-center">
           <div className="flex-1 overflow-hidden">
             <div className="flex items-center gap-8 whitespace-nowrap animate-marquee font-bold text-[11px] uppercase tracking-wider">
-              {Array(4).fill("Developer Sahil continues to work behind the scenes. This portfolio is still under development — more updates coming soon.").map((text, idx) => (
-                <span key={idx} className="flex items-center gap-4">
+              {Array(2).fill([
+                "🚨 BREAKING: PORTFOLIO UPDATE UNDERWAY",
+                weatherStr ? `🌤️ LIVE WEATHER: ${weatherStr.toUpperCase()}` : "📡 NEW DISPATCHES INCOMING",
+                "💻 ARCHITECT: SAHILPREET SINGH"
+              ]).flat().map((text, idx) => (
+                <span key={idx} className="flex items-center gap-6">
                   <span>{text}</span>
-                  <span className="text-[#111111]">•</span>
+                  <span className="text-[#111111]">//</span>
                 </span>
               ))}
             </div>
@@ -227,28 +228,29 @@ export default function NewspaperHeader() {
       </div>
 
       {/* Top Printed Metadata & Newsroom Telemetry Bar */}
-      <div suppressHydrationWarning className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 border-b border-[#111111]/20 flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-wider text-[#444444]">
-        <div suppressHydrationWarning className="flex flex-wrap items-center gap-3">
-          <span className="font-bold text-[#111111]">VOL. MMXXVI • NO. 01</span>
-          <span>•</span>
-          <span className="text-[#E63946] font-bold">NEWSROOM: AMRITSAR, INDIA</span>
-          {weatherStr && (
-            <>
-              <span className="hidden md:inline">•</span>
-              <span className="hidden md:inline text-[#555555]">{weatherStr}</span>
-            </>
-          )}
-        </div>
+      <div suppressHydrationWarning className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 border-b border-[#111111]/20 font-mono text-[10px] sm:text-[11px] uppercase tracking-wider text-[#444444]">
+        {/* Mobile: Grid Layout (2 columns, 2 rows) / Desktop: Single Row Flex */}
+        <div className="grid grid-cols-2 sm:flex sm:items-center sm:justify-between gap-y-1.5 sm:gap-y-0">
+          {/* Left: Vol & Date */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-left">
+            <span className="font-bold text-[#111111]">VOL. MMXXVI • NO. 01</span>
+            <span className="hidden sm:inline text-[#111111]/20">|</span>
+            <span className="font-bold text-[#111111] sm:hidden">{mounted ? dateStr : "AUG 14, 2026"}</span>
+          </div>
 
-        <div suppressHydrationWarning className="flex flex-wrap items-center gap-4">
-          <span className="flex items-center gap-1.5 text-emerald-700 font-bold">
-            <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
-            SYS: 99.9% UPTIME
-          </span>
-          <span>•</span>
-          <span className="font-bold text-[#111111]">{mounted ? dateStr : "AUG 14, 2026"}</span>
-          <span>•</span>
-          <span className="font-bold text-[#E63946]">{mounted ? timeStr : "12:12 AM IST"}</span>
+          {/* Right: Location & Time */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-right sm:text-left">
+            <span className="text-[#E63946] font-bold">AMRITSAR, INDIA</span>
+            <span className="hidden sm:inline text-[#111111]/20">|</span>
+            <span className="font-bold text-[#E63946] sm:hidden">{mounted ? timeStr : "12:12 AM IST"}</span>
+          </div>
+
+          {/* Desktop Only Date & Time */}
+          <div className="hidden sm:flex items-center gap-3">
+            <span className="font-bold text-[#111111]">{mounted ? dateStr : "AUG 14, 2026"}</span>
+            <span className="text-[#111111]/20">|</span>
+            <span className="font-bold text-[#E63946]">{mounted ? timeStr : "12:12 AM IST"}</span>
+          </div>
         </div>
       </div>
 
@@ -256,7 +258,7 @@ export default function NewspaperHeader() {
       {/* Main Newspaper Banner Title */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center space-y-2">
         <Link href="/" className="inline-block group">
-          <h1 className="font-serif-editorial font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-[#111111] uppercase leading-none group-hover:text-[#E63946] transition-colors">
+          <h1 className="font-serif-editorial font-black text-3xl xs:text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-[#111111] uppercase leading-none group-hover:text-[#E63946] transition-colors">
             THE SAHILPREET DISPATCH
           </h1>
         </Link>
@@ -266,7 +268,7 @@ export default function NewspaperHeader() {
 
         {/* 3D Animated Character resting cleanly on top of the horizontal divider line */}
         <div 
-          className="absolute bottom-0 left-2 sm:left-6 md:left-10 pointer-events-auto cursor-pointer z-30 transform translate-y-0 hidden sm:block"
+          className="absolute bottom-0 -left-3 sm:left-4 md:left-6 z-30 pointer-events-auto cursor-pointer flex justify-center"
           onMouseEnter={() => {
             console.log("Hover ENTER. Tween active:", !!tweenRef.current);
             if (tweenRef.current) tweenRef.current.play();
@@ -275,10 +277,21 @@ export default function NewspaperHeader() {
             console.log("Hover LEAVE. Tween active:", !!tweenRef.current);
             if (tweenRef.current) tweenRef.current.reverse();
           }}
+          onClick={() => {
+            console.log("Character CLICK. Tween active:", !!tweenRef.current);
+            if (tweenRef.current) {
+              const tween = tweenRef.current;
+              if (tween.progress() === 0 || tween.reversed()) {
+                tween.play();
+              } else {
+                tween.reverse();
+              }
+            }
+          }}
         >
           <canvas
             ref={canvasRef}
-            className="h-24 sm:h-28 md:h-32 lg:h-36 w-auto object-contain block"
+            className="h-20 sm:h-24 md:h-28 lg:h-32 w-auto object-contain block"
           />
         </div>
       </div>
@@ -311,38 +324,40 @@ export default function NewspaperHeader() {
 
           {/* Quick CTA Actions & Theme Switcher (Single Horizontal Line) */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-            {/* Readership Ink Theme Switcher - Hidden on mobile, shown on tablet/desktop */}
-            <div className="hidden sm:flex items-center h-9 px-1.5 bg-[#FFFFFF] border border-[#111111] font-mono text-[10px] font-bold shrink-0">
+            {/* Readership Ink Theme Switcher - Always visible, responsive on mobile */}
+            <div className="flex items-center h-9 px-1 bg-[#FFFFFF] border border-[#111111] font-mono text-[9px] sm:text-[10px] font-bold shrink-0">
               <span className="px-1 text-[#555555] flex items-center gap-1">
                 <Palette className="w-3 h-3 text-[#E63946]" />
                 <span className="hidden sm:inline">INK:</span>
               </span>
               <button
                 onClick={() => handleThemeChange("parchment")}
-                className={`h-6 px-1.5 sm:px-2 flex items-center transition-colors ${
+                className={`h-6 px-1.5 sm:px-2 flex items-center justify-center transition-colors ${
                   currentTheme === "parchment" ? "bg-[#111111] text-[#F7F5F0]" : "hover:text-[#E63946]"
                 }`}
-                title="Parchment Broadsheet Theme"
+                title="Parchment Theme"
               >
-                MORNING
+                <span className="hidden xs:inline">MORNING</span>
+                <span className="xs:hidden">MORN</span>
               </button>
               <button
                 onClick={() => handleThemeChange("midnight")}
-                className={`h-6 px-1.5 sm:px-2 flex items-center transition-colors ${
+                className={`h-6 px-1.5 sm:px-2 flex items-center justify-center transition-colors ${
                   currentTheme === "midnight" ? "bg-[#111111] text-[#F7F5F0]" : "hover:text-[#E63946]"
                 }`}
-                title="Midnight Dark Ink Theme"
+                title="Midnight Theme"
               >
-                MIDNIGHT
+                <span className="hidden xs:inline">MIDNIGHT</span>
+                <span className="xs:hidden">MID</span>
               </button>
               <button
                 onClick={() => handleThemeChange("sepia")}
-                className={`h-6 px-1.5 sm:px-2 flex items-center transition-colors ${
+                className={`h-6 px-1.5 sm:px-2 flex items-center justify-center transition-colors ${
                   currentTheme === "sepia" ? "bg-[#111111] text-[#F7F5F0]" : "hover:text-[#E63946]"
                 }`}
-                title="Vintage Sepia Newsprint Theme"
+                title="Sepia Theme"
               >
-                SEPIA
+                <span>SEPIA</span>
               </button>
             </div>
 
@@ -361,11 +376,10 @@ export default function NewspaperHeader() {
 
             <Link
               href="/contact"
-              className="h-9 px-2 sm:px-3.5 bg-[#111111] text-[#F7F5F0] font-bold text-xs flex items-center gap-1.5 hover:bg-[#E63946] transition-colors shrink-0"
+              className="hidden lg:flex h-9 px-3.5 bg-[#111111] text-[#F7F5F0] font-bold text-xs flex items-center gap-1.5 hover:bg-[#E63946] transition-colors shrink-0"
               title="Send Correspondence"
             >
-              <span className="hidden sm:inline">SEND DISPATCH</span>
-              <span className="inline sm:hidden">SEND</span>
+              <span>SEND DISPATCH</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
           </div>
@@ -378,80 +392,46 @@ export default function NewspaperHeader() {
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
+        {/* Mobile Drawer (Floating Overlay) */}
+        {mobileMenuOpen && (
+          <div className="absolute top-full left-0 w-full p-6 bg-[#FFFFFF] border-b-2 border-[#111111] space-y-4 font-mono text-xs lg:hidden z-50 shadow-xl">
+            <div className="space-y-2">
+              {navItems.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`block p-3 border border-[#111111] font-bold transition-all ${
+                      isActive
+                        ? "bg-[#111111] text-[#F7F5F0]"
+                        : "text-[#111111] hover:bg-[#111111] hover:text-[#F7F5F0]"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+              
+              {/* SEND DISPATCH Primary CTA inside the Drawer */}
+              <Link
+                href="/contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-3 bg-[#E63946] text-white border border-[#111111] font-bold flex items-center justify-center gap-1.5 hover:bg-[#111111] transition-colors"
+              >
+                <span>SEND DISPATCH</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Worldwide Open Source Radio Player Drawer */}
       {radioOpen && (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 border-b-2 border-[#111111] bg-[#F7F5F0] no-print">
           <VintageRadioPlayer />
-        </div>
-      )}
-
-      {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div className="p-6 bg-[#FFFFFF] border-b-2 border-[#111111] space-y-4 font-mono text-xs lg:hidden">
-          <div className="space-y-2">
-            {navItems.map((item) => {
-              const isActive = pathname === item.href;
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`block p-3 border border-[#111111] font-bold transition-all ${
-                    isActive
-                      ? "bg-[#111111] text-[#F7F5F0]"
-                      : "text-[#111111] hover:bg-[#111111] hover:text-[#F7F5F0]"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </div>
-
-          {/* Mobile Theme Switcher */}
-          <div className="pt-4 border-t border-[#111111]/20 flex flex-col gap-2">
-            <span className="font-bold text-[#E63946] flex items-center gap-1.5">
-              <Palette className="w-3.5 h-3.5" />
-              <span>SELECT INK THEME:</span>
-            </span>
-            <div className="flex bg-[#F7F5F0] border border-[#111111] p-1 gap-1">
-              <button
-                onClick={() => {
-                  handleThemeChange("parchment");
-                  setMobileMenuOpen(false);
-                }}
-                className={`flex-1 py-2.5 text-center font-bold transition-all ${
-                  currentTheme === "parchment" ? "bg-[#111111] text-[#F7F5F0]" : "hover:text-[#E63946] text-[#111111]"
-                }`}
-              >
-                MORNING
-              </button>
-              <button
-                onClick={() => {
-                  handleThemeChange("midnight");
-                  setMobileMenuOpen(false);
-                }}
-                className={`flex-1 py-2.5 text-center font-bold transition-all ${
-                  currentTheme === "midnight" ? "bg-[#111111] text-[#F7F5F0]" : "hover:text-[#E63946] text-[#111111]"
-                }`}
-              >
-                MIDNIGHT
-              </button>
-              <button
-                onClick={() => {
-                  handleThemeChange("sepia");
-                  setMobileMenuOpen(false);
-                }}
-                className={`flex-1 py-2.5 text-center font-bold transition-all ${
-                  currentTheme === "sepia" ? "bg-[#111111] text-[#F7F5F0]" : "hover:text-[#E63946] text-[#111111]"
-                }`}
-              >
-                SEPIA
-              </button>
-            </div>
-          </div>
         </div>
       )}
     </header>

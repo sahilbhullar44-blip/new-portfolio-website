@@ -11,14 +11,14 @@ export default function NewspaperFrontPageHero() {
     <section id="cover" className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-10 newspaper-grid">
       {/* Front Page Headline Section */}
       <div className="space-y-4 text-center border-b border-[#111111]/30 pb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#111111] text-[#F7F5F0] font-mono text-xs font-bold uppercase tracking-widest">
+        <div className="headline-badge inline-flex items-center gap-2 px-3 py-1 font-mono text-xs font-bold uppercase tracking-widest">
           <Sparkles className="w-3.5 h-3.5 text-[#E63946]" />
           <span>FRONT PAGE LEAD STORY // SPECIAL DISPATCH</span>
         </div>
 
-        <h1 className="font-serif-editorial font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight text-[#111111] uppercase leading-[1.05]">
+        <h1 className="font-serif-editorial font-black text-3xl sm:text-6xl lg:text-7xl tracking-tight text-[#111111] uppercase leading-[1.15] sm:leading-[1.05]">
           ENGINEERING SCALABLE <br />
-          <span className="italic underline decoration-[#E63946] decoration-4 underline-offset-8">MULTI-TENANT ARCHITECTURE</span> <br />
+          <span className="italic sm:underline decoration-[#E63946] decoration-4 sm:underline-offset-8">MULTI-TENANT ARCHITECTURE</span> <br />
           & AI SPEECH PIPELINES
         </h1>
 
@@ -43,20 +43,54 @@ export default function NewspaperFrontPageHero() {
             01 // ARCHITECT'S LETTER
           </div>
 
-          <div className="font-sans text-sm text-[#222222] leading-relaxed space-y-4">
-            <p className="drop-cap">
-              Sahilpreet Singh is a Software Systems Architect specializing in multi-tenant MERN stack platforms, high-frequency WebSockets, and AI speech-to-text ETL pipelines. Building scalable web infrastructure designed to process high concurrency workloads with zero latency compromise.
-            </p>
+          {/* Desktop Version - Shown on sm: and above */}
+          <div className="hidden sm:block space-y-4">
+            <div className="font-sans text-sm text-[#222222] leading-relaxed space-y-4">
+              <p className="drop-cap">
+                Sahilpreet Singh is a Software Systems Architect specializing in multi-tenant MERN stack platforms, high-frequency WebSockets, and AI speech-to-text ETL pipelines. Building scalable web infrastructure designed to process high concurrency workloads with zero latency compromise.
+              </p>
 
-            <p>
-              Over the past several years, I've designed and delivered over 8 production applications spanning multi-tenant SaaS suites, high-concurrency live streaming backplanes, and automated AI sentiment pipelines.
-            </p>
+              <p>
+                Over the past several years, I've designed and delivered over 8 production applications spanning multi-tenant SaaS suites, high-concurrency live streaming backplanes, and automated AI sentiment pipelines.
+              </p>
+            </div>
+
+            <div className="p-4 bg-[#FFFFFF] border border-[#111111] font-serif-editorial italic text-xs text-[#111111] space-y-1">
+              <p>"Software architecture is not merely writing code; it is designing resilient systems that remain elegant under peak concurrency."</p>
+              <div className="font-mono text-[10px] text-[#E63946] not-italic font-bold tracking-wider pt-1">
+                — SAHILPREET SINGH // DISPATCH AUTHOR
+              </div>
+            </div>
           </div>
 
-          <div className="p-4 bg-[#FFFFFF] border border-[#111111] font-serif-editorial italic text-xs text-[#111111] space-y-1">
-            <p>"Software architecture is not merely writing code; it is designing resilient systems that remain elegant under peak concurrency."</p>
-            <div className="font-mono text-[10px] text-[#E63946] not-italic font-bold tracking-wider pt-1">
-              — SAHILPREET SINGH // DISPATCH AUTHOR
+          {/* Mobile Version - Hidden on sm: and above */}
+          <div className="sm:hidden space-y-4">
+            <div className="typewriter-card p-4 border border-dashed rounded-sm space-y-4">
+              <p className="font-sans text-sm text-[#222222] leading-relaxed">
+                <span className="monogram-dropcap flex items-center justify-center w-10 h-10 font-serif-editorial font-bold text-2xl float-left mr-3 mt-1 select-none border border-[#E63946]/30">
+                  S
+                </span>
+                ahilpreet Singh is a Software Systems Architect specializing in multi-tenant MERN stack platforms, high-frequency WebSockets, and AI speech-to-text ETL pipelines. Building scalable web infrastructure designed to process high concurrency workloads with zero latency compromise.
+              </p>
+
+              <p className="font-sans text-sm text-[#222222] leading-relaxed">
+                Over the past several years, I've designed and delivered over 8 production applications spanning multi-tenant SaaS suites, high-concurrency live streaming backplanes, and automated AI sentiment pipelines.
+              </p>
+
+              <div className="text-right pt-2 font-serif-editorial italic text-xs text-[#555555]">
+                Sincerely, <br />
+                <span className="text-[#E63946] font-bold tracking-wider not-italic font-mono text-[9px]">SAHILPREET SINGH</span>
+              </div>
+            </div>
+
+            <div className="relative py-5 border-y-2 editorial-double-border my-6">
+              <span className="font-serif text-6xl text-[#E63946]/20 absolute top-0 left-2 select-none leading-none">“</span>
+              <p className="font-serif-editorial italic text-xs text-[#111111] leading-relaxed text-center px-6 relative z-10">
+                "Software architecture is not merely writing code; it is designing resilient systems that remain elegant under peak concurrency."
+              </p>
+              <div className="font-mono text-[9px] text-[#E63946] not-italic font-bold tracking-wider pt-1.5 text-center">
+                — SAHILPREET SINGH // DISPATCH AUTHOR
+              </div>
             </div>
           </div>
         </div>
@@ -68,7 +102,7 @@ export default function NewspaperFrontPageHero() {
             <span className="text-[#E63946]">ISSUE #01</span>
           </div>
 
-          <div className="newspaper-card p-6 sm:p-8 space-y-6">
+          <div className="newspaper-card p-4 sm:p-6 space-y-4">
             <div className="space-y-2">
               <span className="px-2.5 py-1 bg-[#E63946] text-white font-mono text-[10px] font-bold uppercase tracking-wider">
                 COVER CASE STUDY
@@ -96,15 +130,15 @@ export default function NewspaperFrontPageHero() {
               ))}
             </div>
 
-            <div className="pt-4 border-t border-[#111111]/20 flex items-center justify-between font-mono text-xs">
+            <div className="pt-4 border-t border-[#111111]/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 font-mono text-xs">
               <Link
                 href="/projects"
-                className="px-4 py-2 bg-[#111111] text-white font-bold flex items-center gap-2 hover:bg-[#E63946] transition-colors"
+                className="w-full sm:w-auto px-4 py-2 bg-[#111111] text-white font-bold flex items-center justify-center gap-2 hover:bg-[#E63946] transition-colors"
               >
                 <span>READ FEATURE DISPATCHES</span>
                 <ArrowDownRight className="w-4 h-4" />
               </Link>
-              <span className="text-[#555555] font-bold">STATUS: PRODUCTION</span>
+              <span className="text-[#555555] font-bold text-center sm:text-right">STATUS: PRODUCTION</span>
             </div>
           </div>
         </div>
@@ -127,15 +161,14 @@ export default function NewspaperFrontPageHero() {
             </div>
 
             <div className="p-4 bg-[#FFFFFF] border border-[#111111]">
-              <div className="text-3xl font-black text-emerald-700">99.9%</div>
-              <div className="text-[11px] text-[#555555] uppercase font-bold">PIPELINE UPTIME</div>
+              <div className="text-3xl font-black text-emerald-700">100%</div>
+              <div className="text-[11px] text-[#555555] uppercase font-bold">TEST PASS RATE</div>
             </div>
           </div>
 
-          {/* Barcode Element */}
           <div className="p-4 bg-[#FFFFFF] border border-[#111111] space-y-2 text-center font-mono max-w-sm mx-auto lg:max-w-none">
             <div className="text-[10px] text-[#555555] uppercase font-bold">ISSN #2026-SAHILPREET</div>
-            <div className="h-10 bg-repeat-x bg-[length:8px_100%] bg-[linear-gradient(90deg,#111_4px,transparent_4px)] opacity-80"></div>
+            <div className="barcode-strip h-10 bg-repeat-x bg-[length:8px_100%] opacity-80"></div>
             <div className="text-[9px] text-[#555555] tracking-widest">PUBLISHED BY SAHILPREET DISPATCH</div>
           </div>
         </div>

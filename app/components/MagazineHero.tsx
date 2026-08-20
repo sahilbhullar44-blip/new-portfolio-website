@@ -111,8 +111,8 @@ export default function MagazineHero() {
                 <div className="text-[10px] text-slate-400">LATENCY</div>
               </div>
               <div className="p-2.5 rounded-xl bg-white/5 border border-white/5">
-                <div className="text-lg font-bold text-emerald-400">99.9%</div>
-                <div className="text-[10px] text-slate-400">UPTIME</div>
+                <div className="text-lg font-bold text-emerald-400">100%</div>
+                <div className="text-[10px] text-slate-400">TEST PASS</div>
               </div>
             </div>
           </div>
