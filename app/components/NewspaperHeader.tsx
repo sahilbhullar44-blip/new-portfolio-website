@@ -252,10 +252,6 @@ export default function NewspaperHeader() {
         </div>
       </div>
 
-      {/* Permanently Embedded Newsroom Worldwide Radio Bar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 border-b border-[#111111]/20 no-print">
-        <VintageRadioPlayer />
-      </div>
 
       {/* Main Newspaper Banner Title */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center space-y-2">
@@ -270,7 +266,7 @@ export default function NewspaperHeader() {
 
         {/* 3D Animated Character resting cleanly on top of the horizontal divider line */}
         <div 
-          className="absolute bottom-0 left-2 sm:left-6 md:left-10 pointer-events-auto cursor-pointer z-30 transform translate-y-0"
+          className="absolute bottom-0 left-2 sm:left-6 md:left-10 pointer-events-auto cursor-pointer z-30 transform translate-y-0 hidden sm:block"
           onMouseEnter={() => {
             console.log("Hover ENTER. Tween active:", !!tweenRef.current);
             if (tweenRef.current) tweenRef.current.play();
@@ -315,8 +311,8 @@ export default function NewspaperHeader() {
 
           {/* Quick CTA Actions & Theme Switcher (Single Horizontal Line) */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-            {/* Readership Ink Theme Switcher */}
-            <div className="flex items-center h-9 px-1.5 bg-[#FFFFFF] border border-[#111111] font-mono text-[10px] font-bold shrink-0">
+            {/* Readership Ink Theme Switcher - Hidden on mobile, shown on tablet/desktop */}
+            <div className="hidden sm:flex items-center h-9 px-1.5 bg-[#FFFFFF] border border-[#111111] font-mono text-[10px] font-bold shrink-0">
               <span className="px-1 text-[#555555] flex items-center gap-1">
                 <Palette className="w-3 h-3 text-[#E63946]" />
                 <span className="hidden sm:inline">INK:</span>
@@ -365,9 +361,11 @@ export default function NewspaperHeader() {
 
             <Link
               href="/contact"
-              className="h-9 px-3.5 bg-[#111111] text-[#F7F5F0] font-bold text-xs flex items-center gap-1.5 hover:bg-[#E63946] transition-colors shrink-0"
+              className="h-9 px-2 sm:px-3.5 bg-[#111111] text-[#F7F5F0] font-bold text-xs flex items-center gap-1.5 hover:bg-[#E63946] transition-colors shrink-0"
+              title="Send Correspondence"
             >
-              <span>SEND DISPATCH</span>
+              <span className="hidden sm:inline">SEND DISPATCH</span>
+              <span className="inline sm:hidden">SEND</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
           </div>
@@ -391,24 +389,69 @@ export default function NewspaperHeader() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="p-6 bg-[#FFFFFF] border-b-2 border-[#111111] space-y-3 font-mono text-xs lg:hidden">
-          {navItems.map((item) => {
-            const isActive = pathname === item.href;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`block p-3 border border-[#111111] font-bold transition-all ${
-                  isActive
-                    ? "bg-[#111111] text-[#F7F5F0]"
-                    : "text-[#111111] hover:bg-[#111111] hover:text-[#F7F5F0]"
+        <div className="p-6 bg-[#FFFFFF] border-b-2 border-[#111111] space-y-4 font-mono text-xs lg:hidden">
+          <div className="space-y-2">
+            {navItems.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`block p-3 border border-[#111111] font-bold transition-all ${
+                    isActive
+                      ? "bg-[#111111] text-[#F7F5F0]"
+                      : "text-[#111111] hover:bg-[#111111] hover:text-[#F7F5F0]"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Mobile Theme Switcher */}
+          <div className="pt-4 border-t border-[#111111]/20 flex flex-col gap-2">
+            <span className="font-bold text-[#E63946] flex items-center gap-1.5">
+              <Palette className="w-3.5 h-3.5" />
+              <span>SELECT INK THEME:</span>
+            </span>
+            <div className="flex bg-[#F7F5F0] border border-[#111111] p-1 gap-1">
+              <button
+                onClick={() => {
+                  handleThemeChange("parchment");
+                  setMobileMenuOpen(false);
+                }}
+                className={`flex-1 py-2.5 text-center font-bold transition-all ${
+                  currentTheme === "parchment" ? "bg-[#111111] text-[#F7F5F0]" : "hover:text-[#E63946] text-[#111111]"
                 }`}
               >
-                {item.label}
-              </Link>
-            );
-          })}
+                MORNING
+              </button>
+              <button
+                onClick={() => {
+                  handleThemeChange("midnight");
+                  setMobileMenuOpen(false);
+                }}
+                className={`flex-1 py-2.5 text-center font-bold transition-all ${
+                  currentTheme === "midnight" ? "bg-[#111111] text-[#F7F5F0]" : "hover:text-[#E63946] text-[#111111]"
+                }`}
+              >
+                MIDNIGHT
+              </button>
+              <button
+                onClick={() => {
+                  handleThemeChange("sepia");
+                  setMobileMenuOpen(false);
+                }}
+                className={`flex-1 py-2.5 text-center font-bold transition-all ${
+                  currentTheme === "sepia" ? "bg-[#111111] text-[#F7F5F0]" : "hover:text-[#E63946] text-[#111111]"
+                }`}
+              >
+                SEPIA
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </header>
