@@ -72,12 +72,12 @@ export default function NewspaperArticlesSpread() {
       </div>
 
       {/* Projects Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {filteredProjects.map((project, index) => (
           <div
             key={project.id}
             className={`newspaper-card p-6 sm:p-8 space-y-6 flex flex-col justify-between relative overflow-hidden group ${
-              index === 0 ? "lg:col-span-2 bg-[#FFFFFF]" : ""
+              index === 0 ? "md:col-span-2 bg-[#FFFFFF]" : ""
             }`}
           >
             <div className="flex items-center justify-between font-mono text-xs text-[#555555] border-b border-[#111111]/20 pb-3">
