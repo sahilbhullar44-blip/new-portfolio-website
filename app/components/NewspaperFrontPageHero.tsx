@@ -36,9 +36,9 @@ export default function NewspaperFrontPageHero() {
       </div>
 
       {/* 3-Column Newspaper Spread Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 items-start">
         {/* Column 1: Editorial Letter */}
-        <div className="lg:col-span-4 space-y-4 pr-0 lg:pr-6 lg:border-r border-[#111111]/20">
+        <div className="md:col-span-1 lg:col-span-4 space-y-4 pr-0 md:pr-6 md:border-r border-[#111111]/20">
           <div className="font-mono text-xs font-bold text-[#E63946] uppercase tracking-wider border-b border-[#111111] pb-1">
             01 // ARCHITECT'S LETTER
           </div>
@@ -62,7 +62,7 @@ export default function NewspaperFrontPageHero() {
         </div>
 
         {/* Column 2: Lead Front Page Story Card */}
-        <div className="lg:col-span-5 space-y-6 px-0 lg:px-4">
+        <div className="md:col-span-1 lg:col-span-5 space-y-6 px-0 lg:px-4">
           <div className="font-mono text-xs font-bold text-[#111111] uppercase tracking-wider border-b border-[#111111] pb-1 flex items-center justify-between">
             <span>02 // FRONT PAGE FEATURE</span>
             <span className="text-[#E63946]">ISSUE #01</span>
@@ -110,12 +110,12 @@ export default function NewspaperFrontPageHero() {
         </div>
 
         {/* Column 3: Telemetry Stats & Barcode Tag */}
-        <div className="lg:col-span-3 space-y-6 pl-0 lg:pl-6 lg:border-l border-[#111111]/20">
+        <div className="md:col-span-2 lg:col-span-3 space-y-6 pl-0 lg:pl-6 border-t md:border-t lg:border-t-0 lg:border-l border-[#111111]/20 pt-8 lg:pt-0">
           <div className="font-mono text-xs font-bold text-[#111111] uppercase tracking-wider border-b border-[#111111] pb-1">
             03 // SYSTEM TELEMETRY
           </div>
 
-          <div className="space-y-4 font-mono text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4 font-mono text-xs">
             <div className="p-4 bg-[#FFFFFF] border border-[#111111]">
               <div className="text-3xl font-black text-[#111111]">8+</div>
               <div className="text-[11px] text-[#555555] uppercase font-bold">PROD APPS BUILT</div>
@@ -133,7 +133,7 @@ export default function NewspaperFrontPageHero() {
           </div>
 
           {/* Barcode Element */}
-          <div className="p-4 bg-[#FFFFFF] border border-[#111111] space-y-2 text-center font-mono">
+          <div className="p-4 bg-[#FFFFFF] border border-[#111111] space-y-2 text-center font-mono max-w-sm mx-auto lg:max-w-none">
             <div className="text-[10px] text-[#555555] uppercase font-bold">ISSN #2026-SAHILPREET</div>
             <div className="h-10 bg-repeat-x bg-[length:8px_100%] bg-[linear-gradient(90deg,#111_4px,transparent_4px)] opacity-80"></div>
             <div className="text-[9px] text-[#555555] tracking-widest">PUBLISHED BY SAHILPREET DISPATCH</div>
